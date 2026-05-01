@@ -1,0 +1,77 @@
+---
+import type { MenuItem } from "../data/menu";
+import { formatPrice, whatsappLink } from "../data/menu";
+
+interface Props {
+  item: MenuItem;
+}
+
+const { item } = Astro.props;
+
+const badgeColors: Record<string, string> = {
+  Popular: "bg-[#E31E24] text-white",
+  Especial: "bg-[#F5A623] text-[#0D1B3E]",
+  Signature: "bg-[#F07D00] text-white",
+  Nuevo: "bg-green-500 text-white",
+};
+
+const badgeClass = item.badge ? (badgeColors[item.badge] ?? "bg-gray-600 text-white") : "";
+
+const orderMsg = `Hola Solo Perros 🌭 quiero pedir: *${item.name}* — ${formatPrice(item.price)}`;
+---
+
+<article
+  class="card-hover bg-[#1a2340] rounded-2xl overflow-hidden border border-[#1B3F8B]/40 flex flex-col"
+>
+  <!-- Imagen del producto -->
+  <div class="relative aspect-[4/3] overflow-hidden bg-[#0D1B3E]">
+    <img
+      src={item.image}
+      alt={item.name}
+      loading="lazy"
+      class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+    />
+    <!-- Badge -->
+    {
+      item.badge && (
+        <span
+          class={`absolute top-3 left-3 text-xs font-bold px-2.5 py-1 rounded-full shadow ${badgeClass}`}
+        >
+          {item.badge}
+        </span>
+      )
+    }
+    <!-- Precio overlay -->
+    <div
+      class="absolute bottom-0 right-0 bg-[#E31E24] text-white font-bold text-lg px-3 py-1 rounded-tl-xl"
+    >
+      {formatPrice(item.price)}
+    </div>
+  </div>
+
+  <!-- Info -->
+  <div class="flex flex-col flex-1 p-4 gap-3">
+    <h3 class="font-display text-2xl text-white tracking-wide">{item.name}</h3>
+    <p class="text-gray-400 text-sm leading-relaxed flex-1">{item.description}</p>
+
+    <!-- Botón pedir -->
+    <a
+      href={whatsappLink(orderMsg)}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-auto flex items-center justify-center gap-2 w-full bg-[#25D366] hover:bg-[#128C7E] text-white text-sm font-bold py-2.5 rounded-xl transition-colors"
+    >
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+        >
+        </path>
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
+        >
+        </path>
+      </svg>
+      Pedir este
+    </a>
+  </div>
+</article>

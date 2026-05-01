@@ -1,0 +1,94 @@
+---
+import { contact, whatsappLink } from "../data/menu";
+---
+
+<section
+  id="inicio"
+  class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0D1B3E]"
+>
+  <!-- Imagen de fondo con overlay -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://images.unsplash.com/photo-1614396379908-38b11c4c8804?w=1600&h=900&fit=crop&crop=center"
+      alt="Hot dogs y hamburguesas Solo Perros"
+      class="w-full h-full object-cover opacity-25"
+    />
+    <!-- Gradiente sobre la imagen -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0D1B3E]/80 via-[#0D1B3E]/40 to-[#111827]">
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 text-center px-4 py-20 max-w-4xl mx-auto">
+    <!-- Logo grande -->
+    <img
+      src="/images/logo.png"
+      alt="Solo Perros"
+      class="w-36 h-36 sm:w-48 sm:h-48 object-contain mx-auto mb-8 drop-shadow-2xl"
+    />
+
+    <!-- Nombre -->
+    <h1 class="font-display text-6xl sm:text-8xl text-white tracking-widest text-shadow mb-2">
+      SOLO PERROS
+    </h1>
+    <p class="text-[#F5A623] font-semibold text-lg sm:text-xl tracking-widest uppercase mb-4">
+      Comidas Rápidas
+    </p>
+
+    <!-- Descripción -->
+    <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+      Los sabores más auténticos de Pasto. Ingredientes frescos, salsas especiales y todo el amor en
+      cada mordida. 🌭🔥
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a
+        href={whatsappLink()}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all shadow-xl hover:shadow-green-500/30 hover:-translate-y-1"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+          >
+          </path>
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
+          >
+          </path>
+        </svg>
+        Pedir a domicilio
+      </a>
+      <a
+        href="#hotdogs"
+        class="flex items-center gap-2 border-2 border-[#E31E24] text-white font-bold text-lg px-8 py-4 rounded-2xl hover:bg-[#E31E24]/20 transition-all"
+      >
+        Ver la carta ↓
+      </a>
+    </div>
+
+    <!-- Datos de contacto quick -->
+    <div class="mt-10 flex flex-wrap gap-4 justify-center text-sm text-gray-400">
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+          >
+          </path>
+        </svg>
+        {contact.whatsappDisplay}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-[#E31E24]" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+          >
+          </path>
+        </svg>
+        {contact.mapsDisplay}
+      </span>
+    </div>
+  </div>
+</section>

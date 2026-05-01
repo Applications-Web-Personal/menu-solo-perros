@@ -1,0 +1,33 @@
+---
+import { bebidas, formatPrice } from "../data/menu";
+---
+
+<section id="bebidas" class="py-16 px-4 max-w-6xl mx-auto">
+  <div class="flex items-center gap-4 mb-10">
+    <div class="w-1.5 h-16 rounded-full bg-[#1B3F8B]"></div>
+    <div>
+      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Para refrescarte</p>
+      <h2 class="font-display text-5xl sm:text-6xl text-[#2451a8] tracking-wide leading-none">
+        🥤 Bebidas
+      </h2>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+    {
+      bebidas.map((bebida) => (
+        <div class="bg-[#1a2340] border border-[#1B3F8B]/40 rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-white tracking-wide mb-4">{bebida.name}</h3>
+          <ul class="space-y-2.5">
+            {bebida.sizes.map((s) => (
+              <li class="flex items-center justify-between border-b border-[#1B3F8B]/30 pb-2 last:border-0 last:pb-0">
+                <span class="text-gray-300 text-sm">{s.label}</span>
+                <span class="text-[#F5A623] font-bold text-base">{formatPrice(s.price)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>

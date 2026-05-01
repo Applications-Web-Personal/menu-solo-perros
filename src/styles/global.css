@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors from Solo Perros logo */
+  --color-brand-red: #e31e24;
+  --color-brand-red-dark: #b71c1c;
+  --color-brand-blue: #1b3f8b;
+  --color-brand-blue-dark: #0d1b3e;
+  --color-brand-blue-light: #2451a8;
+  --color-brand-yellow: #f5a623;
+  --color-brand-orange: #f07d00;
+  --color-brand-white: #ffffff;
+  --color-brand-dark: #111827;
+
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-body: "Nunito", "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    background-color: #111827;
+    color: #f9fafb;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  }
+  .card-hover {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+  }
+}

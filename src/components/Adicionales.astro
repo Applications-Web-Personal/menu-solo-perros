@@ -1,0 +1,24 @@
+---
+import { adicionales } from "../data/menu";
+---
+
+<section class="py-10 px-4 max-w-6xl mx-auto">
+  <div
+    class="bg-[#1a2340] border border-[#1B3F8B]/40 rounded-2xl px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+  >
+    <div class="flex-shrink-0">
+      <p class="font-display text-2xl text-[#F5A623] tracking-wide">⚡ Adicionales incluidos</p>
+      <p class="text-gray-500 text-xs mt-0.5">Sin costo extra — personaliza tu pedido</p>
+    </div>
+    <div class="h-px w-full sm:h-10 sm:w-px bg-[#1B3F8B]/60 sm:mx-4"></div>
+    <div class="flex flex-wrap gap-2">
+      {
+        adicionales.map((a) => (
+          <span class="bg-[#0D1B3E] border border-[#1B3F8B]/50 text-gray-300 text-sm px-3 py-1.5 rounded-full font-medium">
+            {a}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>

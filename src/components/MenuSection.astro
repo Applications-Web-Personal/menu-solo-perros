@@ -1,0 +1,40 @@
+---
+import ProductCard from "./ProductCard.astro";
+import type { MenuItem } from "../data/menu";
+
+interface Props {
+  id: string;
+  title: string;
+  emoji: string;
+  items: MenuItem[];
+  accent?: "red" | "blue" | "yellow";
+}
+
+const { id, title, emoji, items, accent = "red" } = Astro.props;
+
+const accentMap = {
+  red: { bar: "bg-[#E31E24]", text: "text-[#E31E24]" },
+  blue: { bar: "bg-[#1B3F8B]", text: "text-[#2451a8]" },
+  yellow: { bar: "bg-[#F5A623]", text: "text-[#F5A623]" },
+};
+const colors = accentMap[accent];
+---
+
+<section id={id} class="py-16 px-4 max-w-6xl mx-auto">
+  <!-- Encabezado de sección -->
+  <div class="flex items-center gap-4 mb-10">
+    <div class={`w-1.5 h-16 rounded-full ${colors.bar}`}></div>
+    <div>
+      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Nuestra carta</p>
+      <h2 class={`font-display text-5xl sm:text-6xl ${colors.text} tracking-wide leading-none`}>
+        {emoji}
+        {title}
+      </h2>
+    </div>
+  </div>
+
+  <!-- Grid de productos -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {items.map((item) => <ProductCard item={item} />)}
+  </div>
+</section>

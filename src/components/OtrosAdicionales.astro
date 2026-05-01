@@ -1,0 +1,29 @@
+---
+import { adicionalesPago, formatPrice } from "../data/menu";
+---
+
+<section class="py-10 px-4 max-w-6xl mx-auto">
+  <div class="flex items-center gap-4 mb-6">
+    <div class="w-1.5 h-12 rounded-full bg-[#F5A623]"></div>
+    <div>
+      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">
+        Para completar tu pedido
+      </p>
+      <h2 class="font-display text-4xl sm:text-5xl text-[#F5A623] tracking-wide leading-none">
+        💰 Otros Adicionales
+      </h2>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+    {
+      adicionalesPago.map((a) => (
+        <div class="bg-[#1a2340] border border-[#F5A623]/20 rounded-xl p-4 text-center">
+          <p class="text-white text-sm font-semibold leading-tight">{a.name}</p>
+          {a.detail && <p class="text-gray-500 text-xs mt-1">{a.detail}</p>}
+          <p class="text-[#F5A623] font-bold text-lg mt-2">{formatPrice(a.price)}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

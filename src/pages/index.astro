@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import MenuSection from "../components/MenuSection.astro";
+import Adicionales from "../components/Adicionales.astro";
+import OtrosAdicionales from "../components/OtrosAdicionales.astro";
+import Combos from "../components/Combos.astro";
+import Bebidas from "../components/Bebidas.astro";
+import Location from "../components/Location.astro";
+import Footer from "../components/Footer.astro";
+import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
+---
+
+<Layout>
+  <Header />
+
+  <main>
+    <Hero />
+
+    <div class="h-1 w-full bg-gradient-to-r from-[#E31E24] via-[#F5A623] to-[#E31E24]"></div>
+
+    <!-- 1. Hot Dogs -->
+    <MenuSection id="hotdogs" title="Hot Dogs" emoji="🌭" items={hotdogs} accent="red" />
+
+    <!-- Adicionales incluidos (sin costo) -->
+    <Adicionales />
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-px bg-gradient-to-r from-transparent via-[#1B3F8B]/60 to-transparent"></div>
+    </div>
+
+    <!-- 2. Hamburguesas -->
+    <MenuSection
+      id="hamburguesas"
+      title="Hamburguesas"
+      emoji="🍔"
+      items={hamburguesas}
+      accent="blue"
+    />
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-px bg-gradient-to-r from-transparent via-[#F5A623]/40 to-transparent"></div>
+    </div>
+
+    <!-- 3. Salchipapas -->
+    <MenuSection
+      id="salchipapas"
+      title="Salchipapas"
+      emoji="🍟"
+      items={salchipapas}
+      accent="yellow"
+    />
+
+    <!-- 4. Combos (debajo de salchipapas) -->
+    <Combos />
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-px bg-gradient-to-r from-transparent via-[#1B3F8B]/60 to-transparent"></div>
+    </div>
+
+    <!-- 5. Bebidas -->
+    <Bebidas />
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-px bg-gradient-to-r from-transparent via-[#F5A623]/40 to-transparent"></div>
+    </div>
+
+    <!-- 6. Otros Adicionales (al final de la carta) -->
+    <OtrosAdicionales />
+
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-px bg-gradient-to-r from-transparent via-[#E31E24]/40 to-transparent"></div>
+    </div>
+
+    <!-- Ubicación -->
+    <Location />
+  </main>
+
+  <Footer />
+
+  <!-- Botón flotante WhatsApp -->
+  <a
+    href="https://wa.me/573146868159?text=Hola%20Solo%20Perros%20%F0%9F%8C%AD%20quiero%20hacer%20un%20pedido"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Pedir a domicilio por WhatsApp"
+  >
+    <span
+      class="sm:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] rounded-full shadow-2xl shadow-green-500/40 hover:scale-110 transition-all"
+    >
+      <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+        >
+        </path>
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
+        >
+        </path>
+      </svg>
+    </span>
+    <span
+      class="hidden sm:flex fixed bottom-6 right-6 z-50 items-center gap-2.5 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-sm px-5 py-3.5 rounded-full shadow-2xl shadow-green-500/40 hover:scale-105 transition-all"
+    >
+      <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+        >
+        </path>
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
+        >
+        </path>
+      </svg>
+      Pedir a domicilio
+    </span>
+  </a>
+</Layout>
