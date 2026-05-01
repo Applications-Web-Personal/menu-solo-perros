@@ -19,7 +19,7 @@ const siteUrl = "https://soloperros.com";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}images/logo.png`} />
     <link rel="canonical" href={siteUrl} />
 
     <title>{title}</title>
@@ -30,7 +30,7 @@ const siteUrl = "https://soloperros.com";
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${siteUrl}/images/logo.png`} />
+    <meta property="og:image" content={`${siteUrl}${import.meta.env.BASE_URL}images/logo.png`} />
     <meta property="og:locale" content="es_CO" />
 
     <!-- Twitter Card -->
