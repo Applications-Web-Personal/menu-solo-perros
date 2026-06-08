@@ -111,7 +111,6 @@ export const hamburguesas: MenuItem[] = [
     price: 20000,
     image:
       "https://images.unsplash.com/photo-1551782450-17144efb9c50?w=600&h=400&fit=crop&crop=center",
-    badge: "Signature",
   },
 ];
 
@@ -161,7 +160,6 @@ export const salchipapas: MenuItem[] = [
     price: 17000,
     image:
       "https://images.unsplash.com/photo-1518013431117-eb1465fa5752?w=600&h=400&fit=crop&crop=center",
-    badge: "Signature",
   },
 ];
 

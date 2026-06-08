@@ -10,6 +10,7 @@ import Bebidas from "../components/Bebidas.astro";
 import Location from "../components/Location.astro";
 import Footer from "../components/Footer.astro";
 import OrderModal from "../components/OrderModal.astro";
+import CartModal from "../components/CartModal.astro";
 import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu";
 ---
 
@@ -88,6 +89,9 @@ import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu
 
   <!-- Modal de personalización de pedido -->
   <OrderModal />
+
+  <!-- Carrito: modal resumen + botón flotante -->
+  <CartModal />
 
   <!-- Botón flotante WhatsApp -->
   <a

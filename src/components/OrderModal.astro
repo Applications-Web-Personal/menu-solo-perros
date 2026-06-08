@@ -182,30 +182,42 @@ function comboLabel(id: string) {
         <span id="modal-total" class="text-white font-bold text-xl"></span>
       </div>
 
-      <!-- Botón -->
-      <button
-        id="modal-confirm"
-        class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] active:bg-[#075E54] text-white font-bold py-3.5 rounded-xl transition-colors text-base"
-      >
-        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-          ></path>
-          <path
-            d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
-          ></path>
-        </svg>
-        Enviar pedido por WhatsApp
-      </button>
+      <!-- Botones: carrito + directo -->
+      <div class="grid grid-cols-2 gap-3">
+        <button
+          id="modal-add-cart"
+          type="button"
+          class="flex items-center justify-center gap-2 bg-[#1B3F8B] hover:bg-[#2451a8] active:bg-[#0D1B3E] text-white font-bold py-3.5 rounded-xl transition-colors text-sm border border-[#1B3F8B]"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h14l-2-8M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/>
+          </svg>
+          Agregar al carrito
+        </button>
+        <button
+          id="modal-confirm"
+          type="button"
+          class="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] active:bg-[#075E54] text-white font-bold py-3.5 rounded-xl transition-colors text-sm"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"></path>
+          </svg>
+          Pedir directo
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
+  import { addItem } from "../scripts/cart";
+
   const modal = document.getElementById("order-modal") as HTMLElement;
   const backdrop = document.getElementById("modal-backdrop") as HTMLElement;
   const closeBtn = document.getElementById("modal-close") as HTMLButtonElement;
   const confirmBtn = document.getElementById("modal-confirm") as HTMLButtonElement;
+  const addCartBtn = document.getElementById("modal-add-cart") as HTMLButtonElement;
   const productNameEl = document.getElementById("modal-product-name") as HTMLElement;
   const productPriceBaseEl = document.getElementById("modal-product-price-base") as HTMLElement;
   const totalEl = document.getElementById("modal-total") as HTMLElement;
@@ -317,10 +329,41 @@ function comboLabel(id: string) {
     if (e.key === "Escape") closeModal();
   });
 
+  function collectSelections() {
+    const gratis = Array.from(
+      modal.querySelectorAll<HTMLInputElement>('input[name="adicional-gratis"]:checked')
+    ).map((cb) => cb.value);
+    const pago = Array.from(
+      modal.querySelectorAll<HTMLInputElement>('input[name="adicional-pago"]:checked')
+    ).map((cb) => ({ name: cb.value, price: parseInt(cb.dataset.price ?? "0", 10) }));
+    const combo = getSelectedCombo();
+    const comboData = combo?.value
+      ? { label: combo.dataset.label ?? "", price: parseInt(combo.dataset.price ?? "0", 10), includes: combo.dataset.includes ?? "" }
+      : null;
+    const obs = observacionesEl.value.trim();
+    const extraPago = pago.reduce((s, a) => s + a.price, 0);
+    const extraCombo = comboData?.price ?? 0;
+    return { gratis, pago, comboData, obs, total: basePrice + extraPago + extraCombo };
+  }
+
   confirmBtn.addEventListener("click", () => {
     const name = productNameEl.textContent ?? "";
     const msg = buildMessage(name);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    closeModal();
+  });
+
+  addCartBtn.addEventListener("click", () => {
+    const { gratis, pago, comboData, obs, total } = collectSelections();
+    addItem({
+      name: productNameEl.textContent ?? "",
+      basePrice,
+      combo: comboData,
+      adicionalesGratis: gratis,
+      adicionalesPago: pago,
+      observaciones: obs,
+      total,
+    });
     closeModal();
   });
 </script>
