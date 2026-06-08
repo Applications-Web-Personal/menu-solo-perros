@@ -229,6 +229,13 @@ function comboLabel(id: string) {
   const combosSection = modal.querySelector<HTMLElement>("#modal-combos-section")!;
   const adicionalesPagoSection = modal.querySelector<HTMLElement>("#modal-adicionales-pago-section")!;
   let basePrice = 0;
+  let currentCategory = "";
+
+  const categoryPrefix: Record<string, string> = {
+    hotdogs: "🌭 Hot Dog",
+    hamburguesas: "🍔 Hamburguesa",
+    salchipapas: "🍟 Salchipapa",
+  };
 
   function formatCOP(n: number) {
     return `$${n.toLocaleString("es-CO")}`;
@@ -250,6 +257,7 @@ function comboLabel(id: string) {
 
   function openModal(name: string, price: number, category: string) {
     basePrice = price;
+    currentCategory = category;
     productNameEl.textContent = name;
     productPriceBaseEl.textContent = formatCOP(price);
 
@@ -362,7 +370,9 @@ function comboLabel(id: string) {
   }
 
   confirmBtn.addEventListener("click", () => {
-    const name = productNameEl.textContent ?? "";
+    const productName = productNameEl.textContent ?? "";
+    const prefix = categoryPrefix[currentCategory];
+    const name = prefix ? `${prefix} ${productName}` : productName;
     const msg = buildMessage(name);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
     closeModal();
@@ -370,8 +380,11 @@ function comboLabel(id: string) {
 
   addCartBtn.addEventListener("click", () => {
     const { gratis, pago, comboData, obs, total } = collectSelections();
+    const productName = productNameEl.textContent ?? "";
+    const prefix = categoryPrefix[currentCategory];
+    const cartName = prefix ? `${prefix} ${productName}` : productName;
     addItem({
-      name: productNameEl.textContent ?? "",
+      name: cartName,
       basePrice,
       combo: comboData,
       adicionalesGratis: gratis,
