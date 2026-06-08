@@ -51,7 +51,7 @@ const colors = accentMap[accent];
 
     <!-- Lista de productos -->
     <div class="lg:w-3/5 flex flex-col gap-4">
-      {items.map((item) => <ProductRow item={item} />)}
+      {items.map((item) => <ProductRow item={item} category={id} />)}
     </div>
   </div>
 </section>
