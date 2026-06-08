@@ -1,5 +1,9 @@
 ---
-import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu";
+import { adicionales, adicionalesPago, combos, formatPrice, contact } from "../data/menu";
+
+function comboLabel(id: string) {
+  return id.replace("combo-", "").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
 ---
 
 <div
@@ -36,6 +40,57 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
 
     <!-- Cuerpo scrolleable -->
     <div class="overflow-y-auto px-5 py-5 space-y-7 flex-1">
+
+      <!-- Combos -->
+      <div>
+        <p class="text-[#F5A623] font-bold text-xs uppercase tracking-wider mb-3 flex items-center gap-1.5">
+          <span>🍟</span> ¿Lo quieres en combo?
+          <span class="text-gray-600 font-normal normal-case tracking-normal">— opcional</span>
+        </p>
+        <div class="space-y-2">
+          <!-- Sin combo (opción por defecto) -->
+          <label class="flex items-center gap-3 cursor-pointer group bg-[#1a2340] hover:bg-[#1B3F8B]/20 rounded-xl px-3 py-2.5 border border-[#1B3F8B]/30 hover:border-[#1B3F8B]/60 transition-colors">
+            <input
+              type="radio"
+              name="combo"
+              value=""
+              checked
+              class="w-4 h-4 accent-[#F5A623] cursor-pointer shrink-0"
+            />
+            <span class="text-gray-400 text-sm group-hover:text-white transition-colors">Sin combo</span>
+          </label>
+          <!-- Cada combo disponible -->
+          {
+            combos.map((combo) => (
+              <label class="flex items-center justify-between gap-3 cursor-pointer group bg-[#1a2340] hover:bg-[#1B3F8B]/20 rounded-xl px-3 py-2.5 border border-[#1B3F8B]/30 hover:border-[#1B3F8B]/60 transition-colors">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <input
+                    type="radio"
+                    name="combo"
+                    value={combo.id}
+                    data-price={combo.price}
+                    data-label={comboLabel(combo.id)}
+                    data-includes={combo.includes.join(", ")}
+                    class="w-4 h-4 accent-[#F5A623] cursor-pointer shrink-0"
+                  />
+                  <div class="min-w-0">
+                    <span class="text-gray-300 text-sm group-hover:text-white transition-colors block leading-tight">
+                      Combo {comboLabel(combo.id)}
+                    </span>
+                    <span class="text-gray-600 text-xs leading-tight block">
+                      {combo.includes.join(" · ")}
+                    </span>
+                  </div>
+                </div>
+                <span class="text-[#F5A623] font-bold text-sm shrink-0">+{formatPrice(combo.price)}</span>
+              </label>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Divisor -->
+      <div class="h-px bg-[#1B3F8B]/40"></div>
 
       <!-- Adicionales gratuitos (solo hot dogs) -->
       <div id="adicionales-gratuitos-section">
@@ -113,7 +168,7 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
         <textarea
           id="modal-observaciones"
           rows="3"
-          placeholder="Ej: sin mayonesa, extra picante, sin cebolla…"
+          placeholder="Ej: extra picante, sin cebolla…"
           class="w-full bg-[#1a2340] border border-[#1B3F8B]/40 rounded-xl px-4 py-3 text-gray-300 text-sm placeholder-gray-600 resize-none focus:outline-none focus:border-[#F5A623]/60 transition-colors"
         ></textarea>
       </div>
@@ -164,11 +219,17 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
     return `$${n.toLocaleString("es-CO")}`;
   }
 
+  function getSelectedCombo() {
+    return modal.querySelector<HTMLInputElement>('input[name="combo"]:checked') ?? null;
+  }
+
   function recalcTotal() {
     let extra = 0;
     modal.querySelectorAll<HTMLInputElement>('input[name="adicional-pago"]:checked').forEach((cb) => {
       extra += parseInt(cb.dataset.price ?? "0", 10);
     });
+    const combo = getSelectedCombo();
+    if (combo?.value) extra += parseInt(combo.dataset.price ?? "0", 10);
     totalEl.textContent = formatCOP(basePrice + extra);
   }
 
@@ -183,6 +244,9 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
     modal.querySelectorAll<HTMLInputElement>("input[type=checkbox]").forEach((cb) => {
       cb.checked = false;
     });
+    // Resetear combo a "Sin combo"
+    const noCombo = modal.querySelector<HTMLInputElement>('input[name="combo"][value=""]');
+    if (noCombo) noCombo.checked = true;
     observacionesEl.value = "";
     recalcTotal();
 
@@ -218,6 +282,11 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
       msg += `\n\n➕ *Adicionales extra:*\n${pago.map((a) => `• ${a.name} (+${formatCOP(a.price)})`).join("\n")}`;
     }
 
+    const combo = getSelectedCombo();
+    if (combo?.value) {
+      msg += `\n\n🍟 *Combo ${combo.dataset.label}* (+${formatCOP(parseInt(combo.dataset.price ?? "0", 10))})\n   ${combo.dataset.includes}`;
+    }
+
     if (obs) {
       msg += `\n\n📝 *Observaciones:* ${obs}`;
     }
@@ -236,9 +305,10 @@ import { adicionales, adicionalesPago, formatPrice, contact } from "../data/menu
     openModal(btn.dataset.name ?? "", parseInt(btn.dataset.price ?? "0", 10), btn.dataset.category ?? "");
   });
 
-  // Recalcula total al marcar/desmarcar adicionales de pago
+  // Recalcula total al cambiar cualquier selección
   modal.addEventListener("change", (e) => {
-    if ((e.target as HTMLInputElement).name === "adicional-pago") recalcTotal();
+    const name = (e.target as HTMLInputElement).name;
+    if (name === "adicional-pago" || name === "combo") recalcTotal();
   });
 
   closeBtn.addEventListener("click", closeModal);
