@@ -86,22 +86,29 @@ import { contact, whatsappLink } from "../data/menu";
         </div>
       </a>
 
-      <!-- Horario (placeholder) -->
-      <div class="bg-[#1a2340] border border-[#F5A623]/20 rounded-2xl p-5">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="w-10 h-10 bg-[#F5A623]/20 rounded-xl flex items-center justify-center">
-            <span class="text-lg">🕐</span>
-          </div>
-          <p class="text-[#F5A623] font-semibold">Horario de atención</p>
+      <!-- Horario -->
+      <div class="flex items-center gap-5 bg-[#1a2340] border border-[#F5A623]/30 rounded-2xl p-5">
+        <div
+          class="w-14 h-14 bg-[#F5A623]/15 border border-[#F5A623]/30 rounded-2xl flex items-center justify-center flex-shrink-0"
+        >
+          <svg
+            class="w-7 h-7 text-[#F5A623]"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"></path>
+          </svg>
         </div>
-        <div class="space-y-1.5 text-sm text-gray-300 ml-13">
-          <div class="flex justify-between">
-            <span class="text-gray-400">Lunes – Viernes</span>
-            <span class="font-semibold">12:00 – 10:00 pm</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-gray-400">Sábados y Domingos</span>
-            <span class="font-semibold">12:00 – 11:00 pm</span>
+        <div class="flex-1 min-w-0">
+          <p class="text-gray-400 text-xs font-semibold uppercase tracking-widest mb-2">
+            Horario de atención
+          </p>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-gray-300 text-sm">Todos los días</span>
+            <span class="text-white font-bold text-sm whitespace-nowrap">6:00 pm – 10:00 pm</span>
           </div>
         </div>
       </div>

@@ -150,7 +150,6 @@ export const salchipapas: MenuItem[] = [
     price: 13000,
     image:
       "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&h=400&fit=crop&crop=center",
-    badge: "Especial",
   },
   {
     id: "sp-picada",

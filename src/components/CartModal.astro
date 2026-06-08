@@ -2,18 +2,33 @@
 import { contact } from "../data/menu";
 ---
 
-<!-- Botón flotante carrito (oculto hasta tener items) -->
+<!-- Botón flotante carrito — encima del botón de WhatsApp, mismo lado derecho -->
+
+<!-- Mobile: círculo compacto -->
 <button
   id="cart-fab"
-  aria-label="Ver carrito"
+  aria-label="Ver resumen del pedido"
   style="display:none"
-  class="fixed bottom-6 left-6 z-50 flex items-center gap-2.5 bg-[#0D1B3E] border-2 border-[#1B3F8B] hover:border-[#F5A623] text-white font-bold px-4 py-3 rounded-full shadow-2xl shadow-blue-900/40 hover:scale-105 transition-all"
+  class="sm:hidden fixed bottom-24 right-6 z-50 items-center justify-center w-14 h-14 bg-[#0D1B3E] border-2 border-[#E31E24] hover:bg-[#E31E24] text-white rounded-full shadow-2xl shadow-[#E31E24]/30 hover:scale-110 transition-all"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h14l-2-8M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/>
+  </svg>
+  <span id="cart-fab-badge" class="absolute -top-1 -right-1 bg-[#E31E24] text-white text-xs font-bold min-w-5 h-5 px-1 rounded-full flex items-center justify-center border-2 border-[#0D1B3E]">0</span>
+</button>
+
+<!-- Desktop: píldora con texto -->
+<button
+  id="cart-fab-desktop"
+  aria-label="Ver resumen del pedido"
+  style="display:none"
+  class="hidden sm:flex fixed bottom-24 right-6 z-50 items-center gap-2.5 bg-[#0D1B3E] border-2 border-[#E31E24] hover:bg-[#E31E24] text-white font-bold px-5 py-3.5 rounded-full shadow-2xl shadow-[#E31E24]/30 hover:scale-105 transition-all"
 >
   <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 8h14l-2-8M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/>
   </svg>
-  <span class="text-sm font-bold">Carrito</span>
-  <span id="cart-fab-badge" class="bg-[#E31E24] text-white text-xs font-bold min-w-[1.25rem] h-5 px-1 rounded-full flex items-center justify-center">0</span>
+  <span class="text-sm">Mi pedido</span>
+  <span id="cart-fab-badge-desktop" class="bg-[#E31E24] text-white text-xs font-bold min-w-5 h-5 px-1 rounded-full flex items-center justify-center">0</span>
 </button>
 
 <!-- Modal resumen del carrito -->
@@ -88,7 +103,9 @@ import { contact } from "../data/menu";
   import type { CartItem } from "../scripts/cart";
 
   const fab = document.getElementById("cart-fab") as HTMLElement;
+  const fabDesktop = document.getElementById("cart-fab-desktop") as HTMLElement;
   const fabBadge = document.getElementById("cart-fab-badge") as HTMLElement;
+  const fabBadgeDesktop = document.getElementById("cart-fab-badge-desktop") as HTMLElement;
   const modal = document.getElementById("cart-modal") as HTMLElement;
   const backdrop = document.getElementById("cart-backdrop") as HTMLElement;
   const closeBtn = document.getElementById("cart-close") as HTMLButtonElement;
@@ -182,12 +199,22 @@ import { contact } from "../data/menu";
 
   document.addEventListener("cart:update", (e: Event) => {
     const { count } = (e as CustomEvent<{ count: number }>).detail;
-    fab.style.display = count > 0 ? "flex" : "none";
+    const show = count > 0;
+    // removeProperty deja que las clases responsive de Tailwind tomen control
+    if (show) {
+      fab.style.removeProperty("display");
+      fabDesktop.style.removeProperty("display");
+    } else {
+      fab.style.display = "none";
+      fabDesktop.style.display = "none";
+    }
     fabBadge.textContent = String(count);
+    fabBadgeDesktop.textContent = String(count);
     if (modal.classList.contains("flex")) renderCart();
   });
 
   fab.addEventListener("click", openCart);
+  fabDesktop.addEventListener("click", openCart);
   closeBtn.addEventListener("click", closeCart);
   backdrop.addEventListener("click", closeCart);
   document.addEventListener("keydown", (e) => {
