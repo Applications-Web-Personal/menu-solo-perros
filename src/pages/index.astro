@@ -9,7 +9,7 @@ import Combos from "../components/Combos.astro";
 import Bebidas from "../components/Bebidas.astro";
 import Location from "../components/Location.astro";
 import Footer from "../components/Footer.astro";
-import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
+import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu";
 ---
 
 <Layout>
@@ -21,7 +21,7 @@ import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
     <div class="h-1 w-full bg-gradient-to-r from-[#E31E24] via-[#F5A623] to-[#E31E24]"></div>
 
     <!-- 1. Hot Dogs -->
-    <MenuSection id="hotdogs" title="Hot Dogs" emoji="🌭" items={hotdogs} accent="red" />
+    <MenuSection id="hotdogs" title="Hot Dogs" emoji="🌭" items={hotdogs} accent="red" categoryImage={categoryImages.hotdogs} />
 
     <!-- Adicionales incluidos (sin costo) -->
     <Adicionales />
@@ -37,6 +37,7 @@ import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
       emoji="🍔"
       items={hamburguesas}
       accent="blue"
+      categoryImage={categoryImages.hamburguesas}
     />
 
     <div class="max-w-6xl mx-auto px-4">
@@ -50,6 +51,7 @@ import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
       emoji="🍟"
       items={salchipapas}
       accent="yellow"
+      categoryImage={categoryImages.salchipapas}
     />
 
     <!-- 4. Combos (debajo de salchipapas) -->
@@ -59,15 +61,15 @@ import { hotdogs, hamburguesas, salchipapas } from "../data/menu";
       <div class="h-px bg-gradient-to-r from-transparent via-[#1B3F8B]/60 to-transparent"></div>
     </div>
 
-    <!-- 5. Bebidas -->
-    <Bebidas />
+    <!-- 5. Otros Adicionales -->
+    <OtrosAdicionales />
 
     <div class="max-w-6xl mx-auto px-4">
       <div class="h-px bg-gradient-to-r from-transparent via-[#F5A623]/40 to-transparent"></div>
     </div>
 
-    <!-- 6. Otros Adicionales (al final de la carta) -->
-    <OtrosAdicionales />
+    <!-- 6. Bebidas -->
+    <Bebidas />
 
     <div class="max-w-6xl mx-auto px-4">
       <div class="h-px bg-gradient-to-r from-transparent via-[#E31E24]/40 to-transparent"></div>

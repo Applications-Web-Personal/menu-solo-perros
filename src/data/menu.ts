@@ -25,6 +25,14 @@ export interface BebidaItem {
   sizes: { label: string; price: number }[];
 }
 
+// ─── IMÁGENES DE CATEGORÍA ────────────────────────────────────────────────────
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const categoryImages = {
+  hotdogs: `${base}/images/hotdogs.jpeg`,
+  hamburguesas: `${base}/images/hamburguesas.jpeg`,
+  salchipapas: `${base}/images/salchipapas.jpeg`,
+};
+
 // ─── HOT DOGS ────────────────────────────────────────────────────────────────
 export const hotdogs: MenuItem[] = [
   {
