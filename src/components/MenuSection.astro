@@ -15,9 +15,9 @@ const { id, title, emoji, items, accent = "red", categoryImage } = Astro.props;
 const sectionImage = categoryImage ?? items[0]?.image;
 
 const accentMap = {
-  red: { bar: "bg-[#E31E24]", text: "text-[#E31E24]" },
-  blue: { bar: "bg-[#1B3F8B]", text: "text-[#2451a8]" },
-  yellow: { bar: "bg-[#F5A623]", text: "text-[#F5A623]" },
+  red: { bar: "accent-bar-red", text: "text-[#E31E24]", sub: "text-[#ff6b6e]" },
+  blue: { bar: "accent-bar-blue", text: "text-[#2451a8]", sub: "text-[#5b8dd9]" },
+  yellow: { bar: "accent-bar-yellow", text: "text-[#F5A623]", sub: "text-[#f5c065]" },
 };
 const colors = accentMap[accent];
 ---
@@ -25,12 +25,11 @@ const colors = accentMap[accent];
 <section id={id} class="py-16 px-4 max-w-6xl mx-auto">
   <!-- Encabezado de sección -->
   <div class="flex items-center gap-4 mb-10">
-    <div class={`w-1.5 h-16 rounded-full ${colors.bar}`}></div>
+    <div class={`w-1.5 h-16 rounded-full shadow-lg ${colors.bar}`}></div>
     <div>
-      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Nuestra carta</p>
-      <h2 class={`font-display text-5xl sm:text-6xl ${colors.text} tracking-wide leading-none`}>
-        {emoji}
-        {title}
+      <p class={`font-sub font-semibold text-xs uppercase tracking-[0.2em] mb-0.5 ${colors.sub}`}>Nuestra carta</p>
+      <h2 class={`font-display text-5xl sm:text-6xl tracking-wide leading-none text-shadow ${colors.text}`}>
+        {emoji} {title}
       </h2>
     </div>
   </div>
@@ -39,13 +38,18 @@ const colors = accentMap[accent];
   <div class="flex flex-col lg:flex-row lg:items-stretch gap-8">
     <!-- Imagen de categoría: banner 16:9 en móvil, altura dinámica en escritorio -->
     <div class="lg:w-2/5 lg:flex lg:flex-col">
-      <div class="relative rounded-2xl overflow-hidden border border-[#1B3F8B]/40 aspect-video lg:aspect-auto lg:flex-1 lg:min-h-[240px]">
-        <img
-          src={sectionImage}
-          alt={title}
-          loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover"
-        />
+      <!-- Gradient border wrapper -->
+      <div class={`p-px rounded-2xl lg:flex-1 bg-linear-to-br ${accent === 'red' ? 'from-[#E31E24]/30 to-[#1B3F8B]/10' : accent === 'yellow' ? 'from-[#F5A623]/30 to-[#1B3F8B]/10' : 'from-[#1B3F8B]/40 to-[#1B3F8B]/10'}`}>
+        <div class="relative rounded-2xl overflow-hidden bg-[#0a1020] aspect-video lg:aspect-auto lg:h-full lg:min-h-60">
+          <img
+            src={sectionImage}
+            alt={title}
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover opacity-90"
+          />
+          <!-- Subtle bottom gradient -->
+          <div class="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-[#0a1020]/60 to-transparent"></div>
+        </div>
       </div>
     </div>
 

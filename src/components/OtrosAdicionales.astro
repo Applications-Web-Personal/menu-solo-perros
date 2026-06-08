@@ -4,12 +4,10 @@ import { adicionalesPago, formatPrice } from "../data/menu";
 
 <section class="py-10 px-4 max-w-6xl mx-auto">
   <div class="flex items-center gap-4 mb-6">
-    <div class="w-1.5 h-12 rounded-full bg-[#F5A623]"></div>
+    <div class="w-1.5 h-12 rounded-full accent-bar-yellow shadow-lg"></div>
     <div>
-      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">
-        Para completar tu pedido
-      </p>
-      <h2 class="font-display text-4xl sm:text-5xl text-[#F5A623] tracking-wide leading-none">
+      <p class="font-sub font-semibold text-xs uppercase tracking-[0.2em] mb-0.5 text-[#f5c065]">Para completar tu pedido</p>
+      <h2 class="font-display text-4xl sm:text-5xl text-[#F5A623] tracking-wide leading-none text-shadow-warm">
         Otros Adicionales
       </h2>
     </div>
@@ -18,10 +16,12 @@ import { adicionalesPago, formatPrice } from "../data/menu";
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
     {
       adicionalesPago.map((a) => (
-        <div class="bg-[#1a2340] border border-[#F5A623]/20 rounded-xl p-4 text-center">
-          <p class="text-white text-sm font-semibold leading-tight">{a.name}</p>
-          {a.detail && <p class="text-gray-500 text-xs mt-1">{a.detail}</p>}
-          <p class="text-[#F5A623] font-bold text-lg mt-2">{formatPrice(a.price)}</p>
+        <div class="p-px rounded-xl bg-linear-to-br from-[#F5A623]/25 via-[#1B3F8B]/10 to-[#1B3F8B]/5">
+          <div class="card-hover bg-linear-to-br from-[#0e1830] to-[#0a1020] rounded-xl p-4 text-center h-full">
+            <p class="text-white text-sm font-semibold leading-tight">{a.name}</p>
+            {a.detail && <p class="text-gray-500 text-xs mt-1 font-sub">{a.detail}</p>}
+            <p class="font-sub font-bold text-lg mt-2 text-[#F5A623] text-shadow-warm">{formatPrice(a.price)}</p>
+          </div>
         </div>
       ))
     }

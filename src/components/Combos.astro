@@ -17,45 +17,43 @@ const variants = combos.map((combo) => ({
 <section id="combos" class="py-16 px-4 max-w-6xl mx-auto">
   <!-- Encabezado -->
   <div class="flex items-center gap-4 mb-10">
-    <div class="w-1.5 h-16 rounded-full bg-[#F5A623]"></div>
+    <div class="w-1.5 h-16 rounded-full accent-bar-yellow shadow-lg"></div>
     <div>
-      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Más por menos</p>
-      <h2 class="font-display text-5xl sm:text-6xl text-[#F5A623] tracking-wide leading-none">
-        Combos
+      <p class="font-sub font-semibold text-xs uppercase tracking-[0.2em] mb-0.5 text-[#f5c065]">Más por menos</p>
+      <h2 class="font-display text-5xl sm:text-6xl text-[#F5A623] tracking-wide leading-none text-shadow-warm">
+        🔥 Combos
       </h2>
     </div>
   </div>
 
-  <article class="bg-[#1a2340] border border-[#F5A623]/20 rounded-2xl p-6 max-w-lg">
-    <!-- Ingredientes comunes -->
-    <p class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-3">Todos incluyen</p>
-    <div class="flex flex-wrap gap-2 mb-6">
-      {
-        commonIncludes.map((inc) => (
-          <span class="text-sm text-gray-300 bg-[#0D1B3E] px-3 py-1 rounded-full border border-[#1B3F8B]/40">
-            {inc}
-          </span>
-        ))
-      }
-    </div>
+  <!-- Gradient border wrapper -->
+  <div class="p-px rounded-2xl max-w-lg bg-linear-to-br from-[#F5A623]/30 via-[#1B3F8B]/15 to-[#1B3F8B]/5">
+    <article class="bg-linear-to-b from-[#0e1830] to-[#0a1020] rounded-2xl p-6">
+      <!-- Ingredientes comunes -->
+      <p class="font-sub font-semibold text-xs uppercase tracking-[0.2em] text-gray-500 mb-3">Todos incluyen</p>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {
+          commonIncludes.map((inc) => (
+            <span class="text-sm text-gray-300 bg-[#0D1B3E] px-3 py-1 rounded-full border border-[#1B3F8B]/40 font-sub font-semibold tracking-wide">
+              {inc}
+            </span>
+          ))
+        }
+      </div>
 
-    <!-- Variantes -->
-    <div class="flex flex-col divide-y divide-[#1B3F8B]/30">
-      {
-        variants.map((v) => {
-          const msg = `Hola Solo Perros 🌭 quiero agregar un combo: *${v.label}* — ${formatPrice(v.price)}`;
-          return (
+      <!-- Variantes -->
+      <div class="flex flex-col divide-y divide-[#1B3F8B]/20">
+        {
+          variants.map((v) => (
             <div class="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-              <span class="text-white text-sm">{v.label}</span>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="text-[#F5A623] font-bold font-display text-lg">
-                  {formatPrice(v.price)}
-                </span>
-              </div>
+              <span class="text-gray-200 text-sm font-semibold">{v.label}</span>
+              <span class="font-sub font-bold text-xl text-[#F5A623] text-shadow-warm shrink-0">
+                {formatPrice(v.price)}
+              </span>
             </div>
-          );
-        })
-      }
-    </div>
-  </article>
+          ))
+        }
+      </div>
+    </article>
+  </div>
 </section>

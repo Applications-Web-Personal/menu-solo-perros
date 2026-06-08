@@ -4,111 +4,93 @@ import { contact, whatsappLink } from "../data/menu";
 
 <section id="ubicacion" class="py-16 px-4 max-w-6xl mx-auto">
   <div class="flex items-center gap-4 mb-10">
-    <div class="w-1.5 h-16 rounded-full bg-[#E31E24]"></div>
+    <div class="w-1.5 h-16 rounded-full accent-bar-red shadow-lg"></div>
     <div>
-      <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Encuéntranos</p>
-      <h2 class="font-display text-5xl sm:text-6xl text-[#E31E24] tracking-wide leading-none">
-        Ubicación
+      <p class="font-sub font-semibold text-xs uppercase tracking-[0.2em] mb-0.5 text-[#ff6b6e]">Encuéntranos</p>
+      <h2 class="font-display text-5xl sm:text-6xl text-[#E31E24] tracking-wide leading-none text-shadow">
+        📍 Ubicación
       </h2>
     </div>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Mapa embed -->
-    <div class="bg-[#1a2340] rounded-2xl overflow-hidden border border-[#1B3F8B]/40 min-h-[300px]">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d200!2d-77.2566142!3d1.2021321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sco!4v1"
-        width="100%"
-        height="100%"
-        class="w-full h-full min-h-[300px]"
-        style="border:0; filter: invert(90%) hue-rotate(180deg);"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación Solo Perros"
-      >
-      </iframe>
+    <!-- Mapa embed con borde degradado -->
+    <div class="p-px rounded-2xl bg-linear-to-br from-[#E31E24]/30 via-[#1B3F8B]/15 to-[#1B3F8B]/5">
+      <div class="bg-[#0a1020] rounded-2xl overflow-hidden min-h-[300px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d200!2d-77.2566142!3d1.2021321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sco!4v1"
+          width="100%"
+          height="100%"
+          class="w-full h-full min-h-[300px]"
+          style="border:0; filter: invert(90%) hue-rotate(180deg);"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación Solo Perros"
+        ></iframe>
+      </div>
     </div>
 
     <!-- Info de contacto -->
     <div class="flex flex-col gap-4">
       <!-- WhatsApp -->
-      <a
-        href={whatsappLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="card-hover flex items-center gap-5 bg-[#1a2340] hover:bg-[#1e2b4a] border border-[#25D366]/30 rounded-2xl p-5 transition-colors"
-      >
-        <div
-          class="w-14 h-14 bg-[#25D366] rounded-2xl flex items-center justify-center flex-shrink-0"
+      <div class="p-px rounded-2xl bg-linear-to-br from-[#25D366]/30 via-[#1B3F8B]/10 to-[#1B3F8B]/5">
+        <a
+          href={whatsappLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card-hover flex items-center gap-5 bg-linear-to-br from-[#0e1830] to-[#0a1020] rounded-2xl p-5 transition-colors"
         >
-          <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-            >
-            </path>
-            <path
-              d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
-            >
-            </path>
-          </svg>
-        </div>
-        <div>
-          <p class="text-gray-400 text-xs font-semibold uppercase tracking-widest">
-            Domicilios y pedidos
-          </p>
-          <p class="text-white font-bold text-xl">{contact.whatsappDisplay}</p>
-          <p class="text-[#25D366] text-sm mt-0.5">Escríbenos ahora →</p>
-        </div>
-      </a>
+          <div class="w-14 h-14 bg-linear-to-br from-[#25D366] to-[#1aad56] rounded-2xl flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(37,211,102,0.35)]">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="font-sub font-semibold text-gray-500 text-xs uppercase tracking-[0.2em]">Domicilios y pedidos</p>
+            <p class="text-white font-bold text-xl mt-0.5">{contact.whatsappDisplay}</p>
+            <p class="text-[#25D366] text-sm mt-0.5 font-sub font-semibold">Escríbenos ahora →</p>
+          </div>
+        </a>
+      </div>
 
-      <!-- Dirección + mapa enlace -->
-      <a
-        href={contact.mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="card-hover flex items-center gap-5 bg-[#1a2340] hover:bg-[#1e2b4a] border border-[#E31E24]/30 rounded-2xl p-5 transition-colors"
-      >
-        <div
-          class="w-14 h-14 bg-[#E31E24] rounded-2xl flex items-center justify-center flex-shrink-0"
+      <!-- Dirección -->
+      <div class="p-px rounded-2xl bg-linear-to-br from-[#E31E24]/30 via-[#1B3F8B]/10 to-[#1B3F8B]/5">
+        <a
+          href={contact.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card-hover flex items-center gap-5 bg-linear-to-br from-[#0e1830] to-[#0a1020] rounded-2xl p-5 transition-colors"
         >
-          <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-            >
-            </path>
-          </svg>
-        </div>
-        <div>
-          <p class="text-gray-400 text-xs font-semibold uppercase tracking-widest">Dirección</p>
-          <p class="text-white font-bold text-base leading-snug">{contact.address}</p>
-          <p class="text-[#E31E24] text-sm mt-1">Ver en Google Maps →</p>
-        </div>
-      </a>
+          <div class="w-14 h-14 bg-linear-to-br from-[#E31E24] to-brand-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(227,30,36,0.35)]">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="font-sub font-semibold text-gray-500 text-xs uppercase tracking-[0.2em]">Dirección</p>
+            <p class="text-white font-bold text-base leading-snug mt-0.5">{contact.address}</p>
+            <p class="text-[#E31E24] text-sm mt-1 font-sub font-semibold">Ver en Google Maps →</p>
+          </div>
+        </a>
+      </div>
 
       <!-- Horario -->
-      <div class="flex items-center gap-5 bg-[#1a2340] border border-[#F5A623]/30 rounded-2xl p-5">
-        <div
-          class="w-14 h-14 bg-[#F5A623]/15 border border-[#F5A623]/30 rounded-2xl flex items-center justify-center flex-shrink-0"
-        >
-          <svg
-            class="w-7 h-7 text-[#F5A623]"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"></path>
-          </svg>
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="text-gray-400 text-xs font-semibold uppercase tracking-widest mb-2">
-            Horario de atención
-          </p>
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-gray-300 text-sm">Todos los días</span>
-            <span class="text-white font-bold text-sm whitespace-nowrap">6:00 pm – 10:00 pm</span>
+      <div class="p-px rounded-2xl bg-linear-to-br from-[#F5A623]/30 via-[#1B3F8B]/10 to-[#1B3F8B]/5">
+        <div class="card-hover flex items-center gap-5 bg-linear-to-br from-[#0e1830] to-[#0a1020] rounded-2xl p-5">
+          <div class="w-14 h-14 bg-[#F5A623]/10 border border-[#F5A623]/30 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(245,166,35,0.2)]">
+            <svg class="w-7 h-7 text-[#F5A623]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-sub font-semibold text-gray-500 text-xs uppercase tracking-[0.2em] mb-2">Horario de atención</p>
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-300 text-sm font-semibold">Todos los días</span>
+              <span class="font-sub font-bold text-base text-[#F5A623] text-shadow-warm whitespace-nowrap">6:00 pm – 10:00 pm</span>
+            </div>
           </div>
         </div>
       </div>

@@ -10,53 +10,52 @@ interface Props {
 const { item, category = "" } = Astro.props;
 
 const badgeColors: Record<string, string> = {
-  Popular: "bg-[#E31E24] text-white",
-  Especial: "bg-[#F5A623] text-[#0D1B3E]",
-  Signature: "bg-[#F07D00] text-white",
-  Nuevo: "bg-green-500 text-white",
+  Popular: "bg-[#E31E24] text-white shadow-[0_0_8px_rgba(227,30,36,0.5)]",
+  Especial: "bg-[#F5A623] text-[#0D1B3E] shadow-[0_0_8px_rgba(245,166,35,0.4)]",
+  Signature: "bg-linear-to-r from-[#F07D00] to-[#E31E24] text-white",
+  Nuevo: "bg-green-500 text-white shadow-[0_0_8px_rgba(34,197,94,0.4)]",
 };
 
 const badgeClass = item.badge ? (badgeColors[item.badge] ?? "bg-gray-600 text-white") : "";
 ---
 
-<article
-  class="card-hover bg-[#1a2340] rounded-2xl border border-[#1B3F8B]/40 p-4 sm:p-5 flex items-start gap-4"
->
-  <div class="flex-1 min-w-0">
-    <div class="flex items-center gap-2 flex-wrap mb-1.5">
-      <h3 class="font-display text-2xl text-white tracking-wide leading-tight">{item.name}</h3>
-      {
-        item.badge && (
-          <span class={`text-xs font-bold px-2.5 py-1 rounded-full ${badgeClass}`}>
-            {item.badge}
-          </span>
-        )
-      }
+<!-- Gradient border wrapper -->
+<div class="p-px rounded-2xl bg-linear-to-br from-[#E31E24]/25 via-[#1B3F8B]/15 to-[#1B3F8B]/5">
+  <article
+    class="card-hover bg-linear-to-br from-[#0e1830] to-[#0a1020] rounded-2xl p-4 sm:p-5 flex items-start gap-4"
+  >
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 flex-wrap mb-1.5">
+        <h3 class="font-display text-2xl text-white tracking-wide leading-tight">{item.name}</h3>
+        {
+          item.badge && (
+            <span class={`text-xs font-bold px-2.5 py-0.5 rounded-full font-sub tracking-wide ${badgeClass}`}>
+              {item.badge}
+            </span>
+          )
+        }
+      </div>
+      <p class="text-gray-500 text-sm leading-relaxed">{item.description}</p>
     </div>
-    <p class="text-gray-400 text-sm leading-relaxed">{item.description}</p>
-  </div>
 
-  <div class="flex flex-col items-end gap-2 shrink-0">
-    <span class="bg-[#E31E24] text-white font-bold text-base px-3 py-1 rounded-xl whitespace-nowrap">
-      {formatPrice(item.price)}
-    </span>
-    <button
-      type="button"
-      data-order-trigger
-      data-name={item.name}
-      data-price={item.price}
-      data-category={category}
-      class="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#128C7E] active:bg-[#075E54] text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors whitespace-nowrap cursor-pointer"
-    >
-      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-        <path
-          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-        ></path>
-        <path
-          d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"
-        ></path>
-      </svg>
-      Pedir
-    </button>
-  </div>
-</article>
+    <div class="flex flex-col items-end gap-2 shrink-0">
+      <span class="bg-linear-to-br from-[#E31E24] to-brand-red-dark text-white font-bold text-base px-3 py-1 rounded-xl whitespace-nowrap font-sub tracking-wider shadow-[0_2px_12px_rgba(227,30,36,0.4)]">
+        {formatPrice(item.price)}
+      </span>
+      <button
+        type="button"
+        data-order-trigger
+        data-name={item.name}
+        data-price={item.price}
+        data-category={category}
+        class="flex items-center gap-1.5 bg-linear-to-r from-[#25D366] to-[#1aad56] hover:from-[#128C7E] hover:to-[#0e7060] active:from-[#075E54] active:to-[#075E54] text-white text-xs font-bold px-3 py-2 rounded-xl transition-all duration-200 whitespace-nowrap cursor-pointer font-sub tracking-wider hover:shadow-[0_0_12px_rgba(37,211,102,0.35)]"
+      >
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L0 24l6.338-1.501A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.373l-.36-.214-3.732.884.944-3.638-.235-.374A9.818 9.818 0 1 1 12 21.818z"></path>
+        </svg>
+        Pedir
+      </button>
+    </div>
+  </article>
+</div>
