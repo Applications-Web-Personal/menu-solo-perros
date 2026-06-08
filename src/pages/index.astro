@@ -21,7 +21,13 @@ import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu
     <div class="h-1 w-full bg-gradient-to-r from-[#E31E24] via-[#F5A623] to-[#E31E24]"></div>
 
     <!-- 1. Hot Dogs -->
-    <MenuSection id="hotdogs" title="Hot Dogs" emoji="🌭" items={hotdogs} accent="red" categoryImage={categoryImages.hotdogs} />
+    <MenuSection
+      id="hotdogs"
+      title="Hot Dogs"
+      items={hotdogs}
+      accent="red"
+      categoryImage={categoryImages.hotdogs}
+    />
 
     <!-- Adicionales incluidos (sin costo) -->
     <Adicionales />
@@ -34,7 +40,6 @@ import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu
     <MenuSection
       id="hamburguesas"
       title="Hamburguesas"
-      emoji="🍔"
       items={hamburguesas}
       accent="blue"
       categoryImage={categoryImages.hamburguesas}
@@ -48,7 +53,6 @@ import { hotdogs, hamburguesas, salchipapas, categoryImages } from "../data/menu
     <MenuSection
       id="salchipapas"
       title="Salchipapas"
-      emoji="🍟"
       items={salchipapas}
       accent="yellow"
       categoryImage={categoryImages.salchipapas}

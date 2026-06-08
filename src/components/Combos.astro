@@ -1,5 +1,5 @@
 ---
-import { combos, formatPrice, whatsappLink } from '../data/menu';
+import { combos, formatPrice, whatsappLink } from "../data/menu";
 
 // Ingredientes comunes a todos los combos
 const commonIncludes = combos.reduce(
@@ -21,45 +21,49 @@ const variants = combos.map((combo) => ({
     <div>
       <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest">Más por menos</p>
       <h2 class="font-display text-5xl sm:text-6xl text-[#F5A623] tracking-wide leading-none">
-        🍟 Combos
+        Combos
       </h2>
     </div>
   </div>
 
   <article class="bg-[#1a2340] border border-[#F5A623]/20 rounded-2xl p-6 max-w-lg">
     <!-- Ingredientes comunes -->
-    <p class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-3">
-      Todos incluyen
-    </p>
+    <p class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-3">Todos incluyen</p>
     <div class="flex flex-wrap gap-2 mb-6">
-      {commonIncludes.map((inc) => (
-        <span class="text-sm text-gray-300 bg-[#0D1B3E] px-3 py-1 rounded-full border border-[#1B3F8B]/40">
-          {inc}
-        </span>
-      ))}
+      {
+        commonIncludes.map((inc) => (
+          <span class="text-sm text-gray-300 bg-[#0D1B3E] px-3 py-1 rounded-full border border-[#1B3F8B]/40">
+            {inc}
+          </span>
+        ))
+      }
     </div>
 
     <!-- Variantes -->
     <div class="flex flex-col divide-y divide-[#1B3F8B]/30">
-      {variants.map((v) => {
-        const msg = `Hola Solo Perros 🌭 quiero agregar un combo: *${v.label}* — ${formatPrice(v.price)}`;
-        return (
-          <div class="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-            <span class="text-white text-sm">{v.label}</span>
-            <div class="flex items-center gap-3 shrink-0">
-              <span class="text-[#F5A623] font-bold font-display text-lg">{formatPrice(v.price)}</span>
-              <a
-                href={whatsappLink(msg)}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-[#F5A623] hover:bg-[#F07D00] text-[#0D1B3E] text-xs font-bold px-3 py-1.5 rounded-xl transition-colors whitespace-nowrap"
-              >
-                Agregar
-              </a>
+      {
+        variants.map((v) => {
+          const msg = `Hola Solo Perros 🌭 quiero agregar un combo: *${v.label}* — ${formatPrice(v.price)}`;
+          return (
+            <div class="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+              <span class="text-white text-sm">{v.label}</span>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-[#F5A623] font-bold font-display text-lg">
+                  {formatPrice(v.price)}
+                </span>
+                <a
+                  href={whatsappLink(msg)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-[#F5A623] hover:bg-[#F07D00] text-[#0D1B3E] text-xs font-bold px-3 py-1.5 rounded-xl transition-colors whitespace-nowrap"
+                >
+                  Agregar
+                </a>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      }
     </div>
   </article>
 </section>
